@@ -79,4 +79,15 @@ func TestTop10(t *testing.T) {
 			require.Equal(t, expected, Top10(text))
 		}
 	})
+
+	t.Run("positive test", func(t *testing.T) {
+		expected := []string{
+			"1", // 2
+			"2", // 2
+			"0", // 1
+			"3", // 1
+			"4", // 1
+		}
+		require.Equal(t, expected, Top10("2 2 1     1 0 \n \r 4 3 "))
+	})
 }
