@@ -30,13 +30,17 @@ func Top10(input string) []string {
 			((wordsCounted[i].Count == wordsCounted[j].Count) && wordsCounted[i].Word < wordsCounted[j].Word)
 	})
 
-	top10 := []string{}
+	topLen := len(wordsCounted)
+	if topLen > 10 {
+		topLen = 10
+	}
+	top10 := make([]string, topLen)
 
 	for i, word := range wordsCounted {
 		if i >= 10 {
 			break
 		}
-		top10 = append(top10, word.Word)
+		top10[i] = word.Word
 	}
 
 	return top10
