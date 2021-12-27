@@ -40,7 +40,11 @@ func Unpack(source string) (string, error) {
 
 		repeat := 1
 		if nextRuneIsDigit {
-			repeat, _ = strconv.Atoi(nextChar)
+			dig, err := strconv.Atoi(nextChar)
+			if err != nil {
+				return "", err
+			}
+			repeat = dig
 		}
 
 		result.WriteString(strings.Repeat(currChar, repeat))
