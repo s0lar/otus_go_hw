@@ -83,6 +83,7 @@ func (l *list) setPrev(currIndex int) {
 		l.buffer[currIndex].Prev = l.buffer[currIndex-1]
 	}
 }
+
 func (l *list) setNext(currIndex int) {
 	switch nextIndex := currIndex + 1; {
 	case l.Len() == 0 || currIndex < 0 || currIndex > l.Len()-1:
