@@ -49,8 +49,80 @@ func TestCache(t *testing.T) {
 		require.Nil(t, val)
 	})
 
-	t.Run("purge logic", func(t *testing.T) {
-		// Write me
+	t.Run("stack overflow", func(t *testing.T) {
+		c := NewCache(3)
+
+		wasInCache := c.Set("aaa", 100)
+		require.False(t, wasInCache)
+
+		wasInCache = c.Set("bbb", 200)
+		require.False(t, wasInCache)
+
+		wasInCache = c.Set("ccc", 300)
+		require.False(t, wasInCache)
+
+		wasInCache = c.Set("ddd", 400)
+		require.False(t, wasInCache)
+
+		val, ok := c.Get("aaa")
+		require.False(t, ok)
+		require.Nil(t, val)
+	})
+
+	t.Run("stack overflow with read", func(t *testing.T) {
+		capacity := 3
+		c := NewCache(capacity)
+		dataCache := []struct {
+			key   Key
+			value string
+		}{
+			{"1", "1"},
+			{"2", "2"},
+			{"3", "3"},
+			{"4", "4"},
+			{"5", "5"},
+			{"6", "6"},
+			{"7", "7"},
+			{"8", "8"},
+			{"9", "9"},
+		}
+
+		for _, data := range dataCache {
+			require.False(t, c.Set(data.key, data.value))
+
+			//	Always read first key from cache
+			val, ok := c.Get(dataCache[0].key)
+			require.True(t, ok)
+			require.Equal(t, dataCache[0].value, val)
+		}
+
+		dataInCache := []struct {
+			key   Key
+			value string
+		}{
+			dataCache[0],
+			dataCache[len(dataCache)-2],
+			dataCache[len(dataCache)-1],
+		}
+
+		for _, data := range dataInCache {
+			_, ok := c.Get(data.key)
+			require.True(t, ok)
+		}
+	})
+
+	t.Run("clear cache", func(t *testing.T) {
+		c := NewCache(5)
+
+		wasInCache := c.Set("aaa", 100)
+		require.False(t, wasInCache)
+
+		c.Clear()
+		_, ok := c.Get("aaa")
+		require.False(t, ok)
+
+		_, ok = c.Get("bbb")
+		require.False(t, ok)
 	})
 }
 
