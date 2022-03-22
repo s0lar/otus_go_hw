@@ -9,7 +9,7 @@ type (
 type Stage func(in In) (out Out)
 
 func ExecutePipeline(in In, done In, stages ...Stage) Out {
-	out := in
+	out := withDoneChannel(in, done)
 
 	for _, stage := range stages {
 		out = stage(withDoneChannel(out, done))
