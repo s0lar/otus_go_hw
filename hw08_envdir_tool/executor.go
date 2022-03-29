@@ -8,9 +8,8 @@ import (
 
 // RunCmd runs a command + arguments (cmd) with environment variables from env.
 func RunCmd(cmd []string, env Environment) (returnCode int) {
-
 	for name, envEl := range env {
-		if true == envEl.NeedRemove {
+		if envEl.NeedRemove {
 			if err := os.Unsetenv(name); err != nil {
 				log.Fatal(err)
 			}

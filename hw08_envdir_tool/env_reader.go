@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"io/ioutil"
-	"log"
 	"strings"
 )
 
@@ -20,7 +19,7 @@ func ReadDir(dir string) (Environment, error) {
 
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
-		log.Fatal(err)
+		return env, err
 	}
 
 	for _, file := range files {
