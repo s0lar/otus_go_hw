@@ -24,7 +24,7 @@ func ReadDir(dir string) (Environment, error) {
 	}
 
 	for _, file := range files {
-		if strings.Index(file.Name(), "=") != -1 {
+		if strings.Contains(file.Name(), "=") {
 			continue
 		}
 		if envValue, err := ReadFile(dir + "/" + file.Name()); err == nil {
