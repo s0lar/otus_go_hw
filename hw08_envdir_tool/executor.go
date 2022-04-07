@@ -1,10 +1,10 @@
 package main
 
 import (
+	"errors"
 	"log"
 	"os"
 	"os/exec"
-	"syscall"
 )
 
 const defaultFailedCode = 1
@@ -32,9 +32,9 @@ func RunCmd(cmd []string, env Environment) (returnCode int) {
 
 	err := command.Run()
 	if err != nil {
-		if exitError, ok := err.(*exec.ExitError); ok { //nolint:errorlint
-			ws := exitError.Sys().(syscall.WaitStatus)
-			exitCode = ws.ExitStatus()
+		var e *exec.ExitError
+		if errors.As(err, &e) {
+			exitCode = e.ExitCode()
 		} else {
 			exitCode = defaultFailedCode
 		}
