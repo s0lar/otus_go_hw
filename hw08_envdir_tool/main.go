@@ -1,5 +1,14 @@
 package main
 
+import (
+	"log"
+	"os"
+)
+
 func main() {
-	// Place your code here.
+	if env, err := ReadDir(os.Args[1]); err != nil {
+		log.Fatal(err)
+	} else {
+		RunCmd(os.Args[2:], env)
+	}
 }
