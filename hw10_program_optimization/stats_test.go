@@ -49,25 +49,4 @@ func BenchmarkGetDomainStat(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_, _ = GetDomainStat(bytes.NewBufferString(data), "com")
 	}
-
-	//t.Run("find 'com'", func(t *testing.T) {
-	//	result, err := GetDomainStat(bytes.NewBufferString(data), "com")
-	//	require.NoError(t, err)
-	//	require.Equal(t, DomainStat{
-	//		"browsecat.com": 2,
-	//		"linktype.com":  1,
-	//	}, result)
-	//})
-	//
-	//t.Run("find 'gov'", func(t *testing.T) {
-	//	result, err := GetDomainStat(bytes.NewBufferString(data), "gov")
-	//	require.NoError(t, err)
-	//	require.Equal(t, DomainStat{"browsedrive.gov": 1}, result)
-	//})
-	//
-	//t.Run("find 'unknown'", func(t *testing.T) {
-	//	result, err := GetDomainStat(bytes.NewBufferString(data), "unknown")
-	//	require.NoError(t, err)
-	//	require.Equal(t, DomainStat{}, result)
-	//})
 }

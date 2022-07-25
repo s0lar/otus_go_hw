@@ -7,3 +7,5 @@
 
 `go tool pprof -http 127.0.0.1:8989 hw10_program_optimization.test profile.cpu.out.old`
 
+`go test -bench=BenchmarkGetDomainStat -benchmem | tee old`
+

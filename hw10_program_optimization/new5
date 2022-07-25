@@ -1,0 +1,7 @@
+goos: linux
+goarch: amd64
+pkg: github.com/s0lar/otus_go_hw/hw10_program_optimization
+cpu: AMD Ryzen 9 5900X 12-Core Processor            
+BenchmarkGetDomainStat-24    	  342379	      5670 ns/op	    5928 B/op	      41 allocs/op
+PASS
+ok  	github.com/s0lar/otus_go_hw/hw10_program_optimization	1.980s
