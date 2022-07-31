@@ -34,7 +34,7 @@ func main() {
 		if err := tc.Receive(); err != nil {
 			log.Fatalln(err)
 		}
-		fmt.Println("...Connection was closed by peer")
+		fmt.Fprintln(os.Stderr, "...Connection was closed by peer")
 		cancel()
 	}()
 
@@ -42,7 +42,7 @@ func main() {
 		if err := tc.Send(); err != nil {
 			log.Fatalln(err)
 		}
-		fmt.Println("...EOF")
+		fmt.Fprintln(os.Stderr, "...EOF")
 		cancel()
 	}()
 
